@@ -1,4 +1,5 @@
 import edu.princeton.cs.algs4.StdIn;
+//branch lab01
 
 /** Simple Arithmetic Class.
  * @author Josh Hug
