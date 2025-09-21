@@ -34,7 +34,10 @@ public class PalindromeStage implements AdventureStage {
                 """);
         while (true) {
             String input = in.readLine();
-            while (!AdventureUtils.isInt(input)) {
+            while (!AdventureUtils.isInt(input) || input == null) {
+                if(input==null){
+                    break;
+                }
                 System.out.println("Please enter a valid integer.");
                 input = this.in.readLine();
             }
@@ -63,10 +66,14 @@ public class PalindromeStage implements AdventureStage {
 
     /** Returns a new IntList with the contents of the original IntList in reverse order.*/
     private static IntList reverseList(IntList l) {
+        if(l == null){
+            return null;
+        }
         IntList reversed = null;
-        while (l.rest != null) {
-            reversed = new IntList(l.first, reversed);
-            l = l.rest;
+        IntList current = l;
+        while (current != null) {
+            reversed = new IntList(current.first, reversed);
+            current = current.rest;
         }
         return reversed;
     }
@@ -76,9 +83,13 @@ public class PalindromeStage implements AdventureStage {
      * For example, the string "606" is converted to 6 -> 0 -> 6.
      */
     private static IntList digitsToIntList(String s) {
+        if(s == null){
+            return IntList.of();
+        }
         int[] a = new int[s.length()];
-        for (int i = s.length(); i > 0; i++) {
-            a[s.length() - i] = Character.getNumericValue(s.charAt(i));
+        for (int i = 0; i < s.length(); i++) {
+//            a[s.length() - i] = Character.getNumericValue(s.charAt(i));
+            a[i] = Character.getNumericValue(s.charAt(i));
         }
         return IntList.of(a);
     }
